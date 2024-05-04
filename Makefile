@@ -1,13 +1,14 @@
 ROOT_DIR:=$(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 DEP = dependencies/
 INCL = /include
-OUT = out/
+OUT = ./
 
 ## Includes
 GLAD			= $(DEP)glad$(INCL)
 GLM 			= $(DEP)glm$(INCL)
 GLWF 			= $(DEP)glfw$(INCL)
 IMGUI	 		= $(DEP)imgui$(INCL)
+AURORA			= $(DEP)auroraui$(INCL)
 #VULKAN 			= $(DEP)vulkan$(INCL)
 
 ## LIBS
@@ -22,15 +23,16 @@ CFLAGS = -std=c++17 -I. -Isrc\
 		-I$(GLM) \
 		-I$(GLWF) \
 		-I$(IMGUI) \
+		-I$(AURORA) \
 		# -I$(VULKAN)
 
 LDFLAGS = -L$(GLFW_L) -l$(GLFW_L_FILE)\
 		-L$(VULKAN_L)
 
-INTERNALS = src/*
+# INTERNALS = src/*
 EXTERNALS = dependencies/*/ext/* #All external source files have to be inside dependencies/<name/ext folder
 
-a.exe: *.cpp *.hpp
+a.exe: *.cpp
 	g++ $(CFLAGS) $(INTERNALS) $(EXTERNALS) -o $(OUT)a.exe *.cpp $(LDFLAGS) 
 
 .PHONY: test clean
