@@ -3,8 +3,6 @@
 #include "aurora_engine.hpp"
 #include <iostream>
 
-
-
 // Returns 1 if there are any errors, else 0
 bool AuroraEngine::InitWindow() {
     if (!glfwInit())
@@ -36,6 +34,7 @@ AuroraEngine* AuroraEngine::InitUI() {
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
     ImGuiIO &io = ImGui::GetIO();
+    ImGui::GetIO().ConfigFlags |= ImGuiConfigFlags_DockingEnable;
 
     ImGui_ImplGlfw_InitForOpenGL(this->window, true);
     ImGui_ImplOpenGL3_Init("#version 130");
